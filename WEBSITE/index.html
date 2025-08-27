@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marina Island Smart Parking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo-icon">🚗</div>
+                <div>
+                    <h1>Marina Island Parking</h1>
+                    <div class="subtitle">Smart Parking Management System</div>
+                </div>
+            </div>
+        </header>
+
+        <div id="main-page" class="page">
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-number available" id="available-count">8</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number occupied" id="occupied-count">0</div>
+                    <div class="stat-label">Occupied</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number total" id="total-count">8</div>
+                    <div class="stat-label">Total Slots</div>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <div class="filter-btn active" onclick="filterSlots('all')">All Slots</div>
+                <div class="filter-btn" onclick="filterSlots('available')">Available Only</div>
+                <div class="filter-btn" onclick="filterSlots('jetty')">Jetty Side</div>
+                <div class="filter-btn" onclick="filterSlots('road')">Road Side</div>
+                <div class="filter-btn" onclick="showMyBookings()">My Bookings</div>
+            </div>
+
+            <h2>Available Parking Slots</h2>
+            <div id="parking-slots" class="slot-container"></div>
+
+            <!-- My Bookings Section (initially hidden) -->
+            <div id="my-bookings" class="hidden">
+                <h2>My Active Bookings</h2>
+                <div id="bookings-list" class="bookings-container"></div>
+            </div>
+        </div>
+
+        <div id="booking-page" class="page hidden">
+            <h2>Complete Your Booking</h2>
+            <div id="selected-slot-info" class="selected-slot-info"></div>
+
+            <div class="form-container">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="plate-number">Car Plate Number:</label>
+                        <input type="text" id="plate-number" name="plate-number" required placeholder="ABC 1234">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-type">Contact Method:</label>
+                        <select id="contact-type" onchange="updateContactInput()">
+                            <option value="phone">Phone Number</option>
+                            <option value="email">Email Address</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact" id="contact-label">Enter Phone Number:</label>
+                        <input type="tel" id="contact" name="contact" required placeholder="+60 12-345 6789">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="button primary">
+                            <span id="confirm-text">Confirm Booking</span>
+                        </button>
+                        <button type="button" class="button secondary" onclick="goBack()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="success-page" class="page hidden">
+            <div class="success-icon">✓</div>
+            <h2>Booking Confirmed!</h2>
+            <div class="success-message" id="success-details"></div>
+            <div class="success-actions">
+                <button class="button primary" onclick="showDirections()">Get Directions</button>
+                <button class="button secondary" onclick="cancelCurrentBooking()">Cancel Booking</button>
+                <button class="button secondary" onclick="goHome()">Home</button>
+            </div>
+        </div>
+
+        <div id="directions-page" class="page hidden">
+            <h2>Directions to Your Parking Slot</h2>
+            <div id="direction-text" class="directions-container"></div>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div class="map-icon">📍</div>
+                    <div class="map-label">Interactive Map</div>
+                </div>
+            </div>
+            <div class="directions-actions">
+                <button class="button primary" onclick="goHome()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
